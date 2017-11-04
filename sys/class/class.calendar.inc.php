@@ -226,7 +226,7 @@ FORM_MARKUP;
         <a href="admin.php" class="admin">+ Add a New Event</a>
         <form action="assets/inc/process.inc.php" method="POST">
             <div>
-                <input type="submit" value="Log Out" class="logout" />
+                <input type="submit" value="Today" class="logout" />
                 <input type="hidden" name="token" value="$_SESSION[token]" />
                 <input type="hidden" name="action" value="user_logout" />
             </div>

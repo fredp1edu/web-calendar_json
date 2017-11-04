@@ -1,10 +1,6 @@
 <?php
     declare(strict_types=1);
     require_once 'sys/core/init.inc.php';
-    if (!isset($_SESSION['user'])) {
-        header("Location: ./");
-        exit;
-    }
 
     $page_title = "Add/Edit Page";
     $css_files = array('style.css', 'admin.css');

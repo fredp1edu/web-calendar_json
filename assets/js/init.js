@@ -9,6 +9,11 @@ var displayEvent = function(ev) {
                 '\n\t<p class=\"para loc\">' +ev.loc+ '</p>' +
                 '\n\t<p class=\"para desc\">' +ev.desc+ '</p>' +
                 '\n\t<p class=\"para date\">Reminder: ' +ev.rem+ '</p>';
+    disp += '<div class="admin-options">\n<form action="admin.php" method="POST">' +
+        '<p><input type="submit" name="edit_event" value="Edit This Event" /><input type="hidden" name="event_id" value="' +
+            ev.id+ '" /><p> </form>' +
+        '<form action="confirmdelete.php" method="POST"><p><input type="submit" name="delete_event" value="Delete This Event" />' +
+        '<input type="hidden" name="event_id" value="' +ev.id+ '" /></p></form></div>';
     return disp;
 };
 var fx = {
@@ -75,7 +80,7 @@ $('document').ready(function() {
     $('body').on('click', '.edit-form a:contains(cancel)', function(event) {
     	fx.boxOut(event);
     });
-    $('body').on('click', '.edit-form input[type=submit]', function(event) {
+    /*$('body').on('click', '.edit-form input[type=submit]', function(event) {
     	event.preventDefault();
     	var formData = $(this).parents('form').serialize();
     	$.ajax({
@@ -90,5 +95,5 @@ $('document').ready(function() {
     			alert(msg);
     		}
     	});
-    });
+    });*/
 });

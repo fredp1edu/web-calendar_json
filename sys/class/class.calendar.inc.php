@@ -65,8 +65,8 @@ class Calendar extends DB_Connect {
             return NULL;
     }
     public function buildCalendar() {
-        $calendarMonth = date('F Y', strtotime($this->_useDate));
         $weekdays = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+        $calendarMonth = date('F Y', strtotime($this->_useDate));
         $html = '<section class="calHead">
         <a href="./?change=-1year">-&#60;&#60;&#60; year</a><a href="./?change=-1month">-&#60;&#60; month</a>
         <a href="./?change=today" class="calMonthYr" title="Click here for current date">' . $calendarMonth . '</a>
@@ -119,7 +119,7 @@ class Calendar extends DB_Connect {
         $id = preg_replace('/[^0-9]/', '', $id);
         $event = $this->_loadEventById($id);
         $tStart = strtotime($event->start);
-        $date = date('F d, Y', $tStart);
+        $date = date('D, F j, Y', $tStart);
         $start = date('g:ia', $tStart);
         $end = date('g:ia', strtotime($event->end));
         $rem = ($event->rem == NULL || $event->rem == '0000-00-00 00:00:00') ? 
@@ -131,6 +131,24 @@ class Calendar extends DB_Connect {
                 "\n\t<p class=\"para loc\">$event->loc</p>" .
                 "\n\t<p class=\"para desc\">$event->desc</p>" .
                 "\n\t<p class=\"para date\">Reminder: $rem</p>" . $admin;
+    }
+    public function displayEventJSON($id) {
+        if (empty($id))
+            return NULL;
+        $id = preg_replace('/[^0-9]/', '', $id);
+        $event = $this->_loadEventById($id);
+        $tStart = strtotime($event->start);
+        $event->date = date('D, F j, Y', $tStart);
+        $start = date('g:ia', $tStart);
+        $end = date('g:ia', strtotime($event->end));
+        $rem = ($event->rem == NULL || $event->rem == '0000-00-00 00:00:00') ? 
+            "no reminder set" : date('g:ia', strtotime($event_rem));
+        $admin = $this->_adminEntryOptions($id);
+        
+        $event->start = $start;
+        $event->end = $end;
+        $event->rem = $rem;
+        return json_encode($event);
     }
     public function displayForm() {
         if (isset($_POST['event_id']))
@@ -204,8 +222,7 @@ FORM_MARKUP;
         }
     }
     private function _adminGeneralOptions() {
-        if (isset($_SESSION['user'])) {
-            return <<<ADMIN_OPTIONS
+        return <<<ADMIN_OPTIONS
         <a href="admin.php" class="admin">+ Add a New Event</a>
         <form action="assets/inc/process.inc.php" method="POST">
             <div>
@@ -215,15 +232,9 @@ FORM_MARKUP;
             </div>
         </form>
 ADMIN_OPTIONS;
-        } else {
-            return <<<ADMIN_OPTIONS
-        <a href="login.php" class="admin">Log In</a>
-ADMIN_OPTIONS;
-        }
     }
     private function _adminEntryOptions($id) {
-        if (isset($_SESSION['user'])) {
-            return <<<ADMIN_OPTIONS
+        return <<<ADMIN_OPTIONS
         <div class="admin-options">
         <form action="admin.php" method="POST">
         <p>
@@ -237,9 +248,6 @@ ADMIN_OPTIONS;
         <input type="hidden" name="event_id" value="$id" />
         </p></form></div>
 ADMIN_OPTIONS;
-        } else {
-            return NULL;
-        }
     }
     public function confirmDelete($id) {
         if (empty($id))

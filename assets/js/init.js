@@ -3,6 +3,14 @@
 
 var processFile = "assets/inc/ajax.inc.php";
 
+var displayEvent = function(ev) {
+    var disp = '<h2>' +ev.title+ '</h2>' +
+                '\n\t<p class=\"para date\">' +ev.date+ ' &mdash; ' +ev.start+ ' &mdash; ' +ev.end+ '</p>' +
+                '\n\t<p class=\"para loc\">' +ev.loc+ '</p>' +
+                '\n\t<p class=\"para desc\">' +ev.desc+ '</p>' +
+                '\n\t<p class=\"para date\">Reminder: ' +ev.rem+ '</p>';
+    return disp;
+};
 var fx = {
 	initModal :  function() {
 		if ($('.modal-window').length == 0) {
@@ -55,31 +63,15 @@ $('document').ready(function() {
     		url: processFile,
     		data: "action=event_view&" + data,
     		success: function(data) {
-    			fx.boxIn(data, modal);
+                var eventInfo = JSON.parse(data);
+                var eventFormat = displayEvent(eventInfo);
+    			fx.boxIn(eventFormat, modal);
     		},
     		error: function(msg) {
     			modal.append(msg);
     		}
     	});
     });
-    /*$('body').on('click', '.admin', function(event) {
-    	event.preventDefault();
-    	var action = 'edit_event';
-    	$.ajax({
-    		type: "POST",
-    		url: processFile,
-    		data: "action=" + action,
-    		success: function(data) {
-    			var form = $(data).hide();
-    			var modal = fx.initModal();
-    			fx.boxIn(null, modal);
-    			form.appendTo(modal).addClass("edit-form").fadeIn('slow');
-    		},
-    		error: function(msg) {
-    			alert(msg);
-    		}
-    	});
-    }); */
     $('body').on('click', '.edit-form a:contains(cancel)', function(event) {
     	fx.boxOut(event);
     });

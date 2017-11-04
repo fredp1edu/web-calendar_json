@@ -13,7 +13,7 @@ foreach ($C as $name => $val) {
 $actions = array(
     'event_view' => array(
         'object' => 'Calendar',
-        'method' => 'displayEvent'
+        'method' => 'displayEventJSON'
     ),
     'edit_event' => array(
         'object' => 'Calendar',

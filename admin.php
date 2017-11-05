@@ -1,5 +1,5 @@
 <?php
-    declare(strict_types=1);
+    /* declare(strict_types=1); unsupported in production env. using old version of PHP */
     require_once 'sys/core/init.inc.php';
 
     $page_title = "Add/Edit Page";

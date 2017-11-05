@@ -1,5 +1,4 @@
-    <?php
-
+<?php
 class Event {
 
     public $id;
@@ -38,5 +37,3 @@ class Event {
     }
 }
 ?>
-
-

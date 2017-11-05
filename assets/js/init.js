@@ -80,20 +80,4 @@ $('document').ready(function() {
     $('body').on('click', '.edit-form a:contains(cancel)', function(event) {
     	fx.boxOut(event);
     });
-    /*$('body').on('click', '.edit-form input[type=submit]', function(event) {
-    	event.preventDefault();
-    	var formData = $(this).parents('form').serialize();
-    	$.ajax({
-    		type: 'POST',
-    		url: processFile,
-    		data: formData,
-    		success: function(data) {
-    			fx.boxOut();
-    			console.log("Event saved");
-    		},
-    		error: function(msg) {
-    			alert(msg);
-    		}
-    	});
-    });*/
 });

@@ -1,8 +1,8 @@
 <?php
-    declare(strict_types=1);
+    /* declare(strict_types=1);  not supported in live env. old ver of PHP 
     $status = session_status();
     if ($status == PHP_SESSION_NONE) 
-        session_start();
+        session_start();*/
 
     if (isset($_POST['event_id']))
         $id = (int) $_POST['event_id'];

@@ -163,31 +163,7 @@ class Calendar extends DB_Connect {
                 return NULL;
             $submit = "Edit This Event";
         } 
-return <<<FORM_MARKUP
-<form action="assets/inc/process.inc.php" method="POST">
-<fieldset>
-<legend>$submit</legend>
-<label for "event_title">Event Title:</label>
-    <input type="text" name="event_title" id="event_title" value="$event->title" />
-<label for "event_type">Type:</label>
-    <input type="text" name="event_type" id="event_type" value="$event->type" />
-<label for "event_start">Start Time:</label>
-    <input type="text" name="event_start" id="event_start" value="$event->start" />
-<label for "event_end">End Time:</label>
-    <input type="text" name="event_end" id="event_end" value="$event->end" />
- <label for "event_loc">Location:</label>
-    <input type="text" name="event_loc" id="event_loc" value="$event->loc" />
-<label for "event_desc">Description:</label>
-    <textarea name="event_desc" id="event_desc"/>$event->desc</textarea>
-<label for "event_rem">Reminder:</label>
-    <input type="text" name="event_rem" id="event_rem" value="$event->rem" />
-<input type="hidden" name="event_id" value="$event->id" />
-<input type="hidden" name="token" value="$_SESSION[token]" />
-<input type="hidden" name="action" value="event_edit" />
-<button type="submit" id="btnEdit">$submit</button> or <a href="./">cancel</a>
-</fieldset>
-</form>
-FORM_MARKUP;
+        return include 'assets/inc/editform.inc.php';
     }
     public function processForm() {
         if ( $_POST['action'] != 'event_edit')

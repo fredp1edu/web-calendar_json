@@ -10,4 +10,7 @@ Notes:
 *   SPECIAL NOTE: THIS APP CURRENTLY HAS NO VALIDATION OF INPUTS -- So inputting invalid date information will simply crash the program right now. I will be adding validation (to the web-calendar_php master), but before doing that, I actually want to revamp the add/edit input forms to limit the types of input: i.e., add selection boxes for date, time and type inputs. I'm going to work on that sooner than later because input right now even for testing is cumbersome.
     *   Started some of the form formatting. For now the 'type' field won't update in the edit screen and will default back to 'Normal' and the reminder field really doesn't work at all right now (all POST values set to null).
 
+* Just one favor:  please do not edit or delete the holiday entries (thanksgiving, vet's day, christmas, etc) for now. Holidays are special cases which won't be editable or deleteable in the updated version, but changing them here changes them in the new version (same db).
+
+
 The continuation of this calendar project is at https://github.com/fredp1edu/web-calendar_php

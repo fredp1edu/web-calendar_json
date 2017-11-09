@@ -122,8 +122,7 @@ class Calendar extends DB_Connect {
         $date = date('D, F j, Y', $tStart);
         $start = date('g:ia', $tStart);
         $end = date('g:ia', strtotime($event->end));
-        $rem = ($event->rem == NULL || $event->rem == '0000-00-00 00:00:00') ? 
-            "no reminder set" : date('g:ia', strtotime($event_rem));
+        $rem = "no reminder set";
         $admin = $this->_adminEntryOptions($id);
         
         return "<h2>$event->title</h2>" .
@@ -141,8 +140,7 @@ class Calendar extends DB_Connect {
         $event->date = date('D, F j, Y', $tStart);
         $start = date('g:ia', $tStart);
         $end = date('g:ia', strtotime($event->end));
-        $rem = ($event->rem == NULL || $event->rem == '0000-00-00 00:00:00') ? 
-            "no reminder set" : date('g:ia', strtotime($event_rem));
+        $rem = "no reminder set";
         $admin = $this->_adminEntryOptions($id);
         
         $event->start = $start;
